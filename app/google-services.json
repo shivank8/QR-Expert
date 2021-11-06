@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "507200549770",
+    "project_id": "qr-code-f7aec",
+    "storage_bucket": "qr-code-f7aec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507200549770:android:563914320cfe603b15ce73",
+        "android_client_info": {
+          "package_name": "com.shivank.qrcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507200549770-01pjh2skurd2kai28sft9gbohe5ro9f5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCdhe8s7h6Ytt0Yqt_eBxvexxPxQZDk6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507200549770-01pjh2skurd2kai28sft9gbohe5ro9f5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
