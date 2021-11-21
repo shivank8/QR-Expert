@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,10 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
+
 class GenerateActivity : AppCompatActivity() {
     private lateinit var txtCodeData:TextView
     private lateinit var btnGenerate:Button
@@ -54,7 +59,8 @@ class GenerateActivity : AppCompatActivity() {
             }
             imgQRCode.setImageBitmap(bitmap)
             Toast.makeText(this,getString(R.string.qr_generated),Toast.LENGTH_SHORT).show()
-
+            // save photo
+            //val savedUri = Uri.fromFile(bitmap )
         } catch (e: WriterException) { Log.d(TAG, e.message.toString()) }
         return bitmap
     }

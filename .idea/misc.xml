@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ASUS/.gradle/caches/transforms-3/37fb01abb233ab64f0c0056c608d69a7/transformed/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_dark.xml" value="0.2703125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_generate.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_intro.xml" value="0.176" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_main.xml" value="0.264" />
