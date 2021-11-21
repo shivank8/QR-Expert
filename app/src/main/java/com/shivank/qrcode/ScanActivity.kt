@@ -9,14 +9,12 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.Barcode.*
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import com.shivank.qrcode.databinding.ActivityMainBinding
-import java.lang.Exception
 import java.util.concurrent.Executors
 
 @ExperimentalGetImage
@@ -39,15 +37,15 @@ class ScanActivity : AppCompatActivity() {
                     }
 
                 val options = BarcodeScannerOptions.Builder().setBarcodeFormats(
-                    Barcode.FORMAT_CODE_128,
-                    Barcode.FORMAT_CODE_39,
-                    Barcode.FORMAT_CODE_93,
-                    Barcode.FORMAT_EAN_8,
-                    Barcode.FORMAT_EAN_13,
-                    Barcode.FORMAT_QR_CODE,
-                    Barcode.FORMAT_UPC_A,
-                    Barcode.FORMAT_UPC_E,
-                    Barcode.FORMAT_PDF417
+                    FORMAT_CODE_128,
+                    FORMAT_CODE_39,
+                    FORMAT_CODE_93,
+                    FORMAT_EAN_8,
+                    FORMAT_EAN_13,
+                    FORMAT_QR_CODE,
+                    FORMAT_UPC_A,
+                    FORMAT_UPC_E,
+                    FORMAT_PDF417
                 ).build()
 
                 val scanner = BarcodeScanning.getClient(options)

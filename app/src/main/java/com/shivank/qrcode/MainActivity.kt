@@ -6,10 +6,9 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnScan :Button
-    lateinit var btnGen :Button
+    private lateinit var btnScan :Button
+    private lateinit var btnGen :Button
 
-    private val TAG = "mytag"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan)

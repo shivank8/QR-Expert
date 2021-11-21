@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">QR Code</string>
     <string name="qr_code_value">QR Code value:</string>
+    <string name="generate">Generate QR Code</string>
+    <string name="enter_qr_code_value">Enter QR Code value</string>
+    <string name="enter_qr_data">Please enter a QR Code value!</string>
+    <string name="qr_generated">QR Code generated!</string>
 </resources>

@@ -1,11 +1,15 @@
 package com.shivank.qrcode
 
+import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,12 +28,13 @@ class GenerateActivity : AppCompatActivity() {
         btnGenerate=findViewById(R.id.btnGenerate)
         imgQRCode=findViewById(R.id.imgQRCode)
         btnGenerate.setOnClickListener{
-            val qrData= txtCodeData.toString()
-            if(qrData.isEmpty()) {
-                val bitmap = generateQRCode(txtCodeData.toString())
-                imgQRCode.setImageBitmap(bitmap)
+            val qrData= txtCodeData.text.toString()
+            if(qrData.isNotEmpty()) {
+                closeSoftKeyboard(this,txtCodeData)
+                generateQRCode(qrData)
+
             }else{
-                Toast.makeText(this,"Please enter a QR Code data!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.enter_qr_data),Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -47,7 +52,15 @@ class GenerateActivity : AppCompatActivity() {
                     bitmap.setPixel(x, y, if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
                 }
             }
-        } catch (e: WriterException) { Log.d(TAG, "generateQRCode: ${e.message}") }
+            imgQRCode.setImageBitmap(bitmap)
+            Toast.makeText(this,getString(R.string.qr_generated),Toast.LENGTH_SHORT).show()
+
+        } catch (e: WriterException) { Log.d(TAG, e.message.toString()) }
         return bitmap
+    }
+    private fun closeSoftKeyboard(context: Context, v: View) {
+        val iMm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        iMm.hideSoftInputFromWindow(v.windowToken, 0)
+        v.clearFocus()
     }
 }
