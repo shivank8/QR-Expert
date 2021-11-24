@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
+    android:background="@color/grey"
     tools:context=".GenerateActivity">
 
     <EditText
         android:id="@+id/txtCodeData"
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:hint="@string/enter_qr_code_value"
         android:padding="12sp"
         android:textColor="@color/white"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.626" />
 
     <ImageView
         android:id="@+id/imgQRCode"
@@ -32,9 +32,9 @@
         app:layout_constraintHeight_percent="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintVertical_bias="0.547"
         app:layout_constraintWidth_percent="0.45"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused" />
+        app:srcCompat="@drawable/qr_code_here" />
 
     <Button
         android:id="@+id/btnGenerate"
@@ -44,8 +44,21 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/imgQRCode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.762" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save to Galley"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgQRCode"
+        app:layout_constraintVertical_bias="0.243" />
 </androidx.constraintlayout.widget.ConstraintLayout>

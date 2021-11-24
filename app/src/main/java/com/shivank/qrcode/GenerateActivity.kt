@@ -19,27 +19,57 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.ContextWrapper
+import java.io.IOException
+import android.os.Environment
+
+
+
+
 
 class GenerateActivity : AppCompatActivity() {
     private lateinit var txtCodeData:TextView
     private lateinit var btnGenerate:Button
+    private lateinit var btnSave:Button
+    private var bitmap: Bitmap? = null
     private lateinit var imgQRCode:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generate)
         txtCodeData=findViewById(R.id.txtCodeData)
         btnGenerate=findViewById(R.id.btnGenerate)
+        btnSave=findViewById(R.id.btnSave)
         imgQRCode=findViewById(R.id.imgQRCode)
         btnGenerate.setOnClickListener{
             val qrData= txtCodeData.text.toString()
             if(qrData.isNotEmpty()) {
                 closeSoftKeyboard(this,txtCodeData)
-                generateQRCode(qrData)
+                bitmap= generateQRCode(qrData)
 
             }else{
                 Toast.makeText(this,getString(R.string.enter_qr_data),Toast.LENGTH_SHORT).show()
+            }
+        }
+        btnSave.setOnClickListener{
+            val root = Environment.getExternalStorageDirectory().toString()
+            val myDir = File("$root/Saved QR Code")
+            myDir.mkdirs()
+            val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            val fname = "QR Code $timeStamp.jpg"
+            val file = File(myDir, fname)
+            try {
+                val out = FileOutputStream(file)
+                bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                out.flush()
+                out.close()
+                Toast.makeText(this,R.string.qr_saved,Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(this,R.string.qr_save_error,Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
             }
         }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#333333"
+    android:background="@color/grey"
     android:layout_height="match_parent"
     tools:context=".ScanActivity">
 
@@ -11,7 +11,7 @@
         android:id="@+id/prvCam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/txtResult"
+        app:layout_constraintBottom_toTopOf="@+id/containerResult"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,8 +20,8 @@
         android:id="@+id/imgFlash"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.1"
-        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.12"
+        app:layout_constraintHeight_percent="0.115"
         app:layout_constraintVertical_bias="0.05"
         app:layout_constraintHorizontal_bias="0.1"
         android:clickable="true"
@@ -32,17 +32,63 @@
         app:srcCompat="@drawable/ic_flash_off"
         android:focusable="true" />
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/containerResult"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:background="@color/grey"
+    app:layout_constraintRight_toRightOf="parent">
+
     <TextView
         android:id="@+id/txtResult"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:padding="30dp"
+        android:text="@string/barcode_value"
+        android:textColor="@color/white"
         android:textIsSelectable="true"
-        android:text="BarCode Value:"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_max="280dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <ImageView
+        android:id="@+id/imgCopyText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.09"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintVertical_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.99"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_copy"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/imgSearch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.09"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintVertical_bias="0.78"
+        app:layout_constraintHorizontal_bias="0.99"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_search"
+        android:focusable="true" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

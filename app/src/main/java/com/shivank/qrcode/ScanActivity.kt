@@ -1,9 +1,13 @@
 package com.shivank.qrcode
 
+import android.app.SearchManager
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
@@ -94,49 +98,53 @@ class ScanActivity : AppCompatActivity() {
     private fun processQRCodeImage(barcodeScanner: BarcodeScanner,
                                    imageProxy: ImageProxy
     ) {
+        var url:String?=null
+        var qrData:String?=null
         imageProxy.image?.let { image ->
             val inputImage = InputImage.fromMediaImage(image, imageProxy.imageInfo.rotationDegrees)
-
             barcodeScanner.process(inputImage)
                 .addOnSuccessListener { barcodeList ->
                     val barcode = barcodeList.getOrNull(0)
-
                     when (barcode?.valueType) {
                         TYPE_WIFI -> {
                             val ssid = barcode.wifi!!.ssid
                             val password = barcode.wifi!!.password
                             val type = barcode.wifi!!.encryptionType
-                            binding.txtResult.text="SSID: $ssid \nPassword: $password \nType: $type "
+                            url=""
+                            qrData="SSID: $ssid \nPassword: $password \nType: $type "
+                            binding.txtResult.text=qrData
                         }
                         TYPE_URL -> {
-                            val title = barcode.url!!.title
-                            val url = barcode.url!!.url
+                            url = barcode.url!!.url
                             binding.txtResult.text="URL: $url"
                         }TYPE_CONTACT_INFO -> {
                         val name = barcode.contactInfo!!.name
                         val phone = barcode.contactInfo!!.phones
                         val email = barcode.contactInfo!!.emails
-                        binding.txtResult.text="Name: $name \nPhone: $phone \nEmail: $email "
+                        qrData="Name: $name \nPhone: $phone \nEmail: $email "
+                        binding.txtResult.text=qrData
                     }TYPE_PHONE -> {
-                        val phone = barcode.phone!!.number
-                        binding.txtResult.text="Phone: $phone "
+                        qrData = barcode.phone!!.number
+                        binding.txtResult.text="Phone: $qrData "
                     }TYPE_EMAIL -> {
                         val add = barcode.email!!.address
                         val subj = barcode.email!!.subject
                         val body = barcode.email!!.body
-                        binding.txtResult.text="Email : $add \nSubject: $subj \nBody: $body "
+                        qrData="Email : $add \nSubject: $subj \nBody: $body "
+                        binding.txtResult.text=qrData
                     }TYPE_TEXT -> {
-                        val data = barcode.displayValue
-                        binding.txtResult.text="BarCode Value: $data"
+                        qrData = barcode.displayValue
+                        binding.txtResult.text="BarCode Value: $qrData"
                     }TYPE_UNKNOWN -> {
-                        val data = barcode.displayValue
-                        binding.txtResult.text="BarCode Value: $data"
+                        qrData = barcode.displayValue
+                        binding.txtResult.text="BarCode Value: $qrData"
                     }else -> {
                         val data = barcode?.displayValue
                         if (data != null) {
                             if(data.isNotEmpty()) {
                                 barcode?.rawValue?.let { data ->
-                                    binding.txtResult.text ="BarCode Value: $data"
+                                    qrData=data
+                                    binding.txtResult.text ="BarCode Value: $qrData"
 
                                 }
                             }
@@ -151,8 +159,18 @@ class ScanActivity : AppCompatActivity() {
                     imageProxy.close()
                 }
         }
-    }
+        binding.imgSearch.setOnClickListener{
+            val browserIntent = Intent(Intent.ACTION_WEB_SEARCH)
+            if(url.isNullOrEmpty()){
+                browserIntent.putExtra(SearchManager.QUERY, qrData)
+            }
+            else{
+                browserIntent.data = Uri.parse(url);
+            }
+            startActivity(browserIntent);
+        }
 
+    }
 
 
     override fun onRestart() {
