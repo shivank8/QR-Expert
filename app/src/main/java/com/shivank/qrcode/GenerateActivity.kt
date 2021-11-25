@@ -3,11 +3,11 @@ package com.shivank.qrcode
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -15,20 +15,16 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
-import android.content.ContextWrapper
-import java.io.IOException
-import android.os.Environment
-
-
-
 
 
 class GenerateActivity : AppCompatActivity() {
@@ -36,6 +32,7 @@ class GenerateActivity : AppCompatActivity() {
     private lateinit var btnGenerate:Button
     private lateinit var btnSave:Button
     private var bitmap: Bitmap? = null
+    private val storagePermCode=15
     private lateinit var imgQRCode:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +52,8 @@ class GenerateActivity : AppCompatActivity() {
             }
         }
         btnSave.setOnClickListener{
+            checkPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE,storagePermCode)
+
             val root = Environment.getExternalStorageDirectory().toString()
             val myDir = File("$root/Saved QR Code")
             myDir.mkdirs()
@@ -68,7 +67,7 @@ class GenerateActivity : AppCompatActivity() {
                 out.close()
                 Toast.makeText(this,R.string.qr_saved,Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(this,R.string.qr_save_error,Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"error ${e.message}",Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
         }
@@ -94,6 +93,27 @@ class GenerateActivity : AppCompatActivity() {
         } catch (e: WriterException) { Log.d(TAG, e.message.toString()) }
         return bitmap
     }
+
+    private fun checkPermission(permission:String,requestCode:Int){
+        if(ContextCompat.checkSelfPermission(this,permission)== PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, arrayOf(permission),requestCode)
+        }
+    }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == storagePermCode) {
+
+            if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(this, "Storage permission denied!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun closeSoftKeyboard(context: Context, v: View) {
         val iMm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         iMm.hideSoftInputFromWindow(v.windowToken, 0)

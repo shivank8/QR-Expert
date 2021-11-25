@@ -226,22 +226,6 @@ class ScanActivity : AppCompatActivity() {
             if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 Toast.makeText(this, "Camera permission Denied", Toast.LENGTH_SHORT).show()
             }
-//        }else if(requestCode==rStorage_Perm_Code){
-//            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-//                checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                    wStorage_Perm_Code)
-//
-//            }else{
-//                Toast.makeText(this, "Storage permission Denied",
-//                    Toast.LENGTH_SHORT).show()
-//            }
-//        }else if(requestCode==wStorage_Perm_Code){
-//            if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-//                Toast.makeText(this, "Storage permission Denied",
-//                    Toast.LENGTH_SHORT).show()
-//
-//
-//            }
         }
 
 
