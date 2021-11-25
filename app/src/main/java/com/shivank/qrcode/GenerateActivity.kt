@@ -37,6 +37,7 @@ class GenerateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generate)
+        checkPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE,storagePermCode)
         txtCodeData=findViewById(R.id.txtCodeData)
         btnGenerate=findViewById(R.id.btnGenerate)
         btnSave=findViewById(R.id.btnSave)
@@ -52,9 +53,7 @@ class GenerateActivity : AppCompatActivity() {
             }
         }
         btnSave.setOnClickListener{
-            checkPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE,storagePermCode)
-
-            val root = Environment.getExternalStorageDirectory().toString()
+            val root = Environment.getExternalStorageDirectory().absoluteFile
             val myDir = File("$root/Saved QR Code")
             myDir.mkdirs()
             val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
