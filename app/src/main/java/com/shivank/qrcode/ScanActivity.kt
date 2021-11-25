@@ -181,8 +181,13 @@ class ScanActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                        // clipboard
+                        binding.imgCopyText.setOnClickListener {
+                            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                            val clip = ClipData.newPlainText("QR value",binding.txtResult.text)
+                            clipboard.setPrimaryClip(clip)
+                            Toast.makeText(this,"Barcode value copied to clipboard." , Toast.LENGTH_SHORT).show()
 
+                        }
                     }
 
                 }
