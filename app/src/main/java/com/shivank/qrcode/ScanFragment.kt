@@ -1,15 +1,19 @@
 package com.shivank.qrcode
 
+import android.app.Activity
 import android.app.SearchManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +21,8 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import com.google.mlkit.vision.barcode.Barcode.*
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -26,24 +32,26 @@ import com.shivank.qrcode.databinding.ActivityMainBinding
 import java.util.concurrent.Executors
 
 @ExperimentalGetImage
-class ScanActivity : AppCompatActivity() {
+class ScanFragment : Fragment() {
     private lateinit var binding: ActivityMainBinding
     private val cameraPermCode=12
     lateinit var camera: Camera
     private val TAG = "mytag"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val view=(binding.root)
         checkPermission(android.Manifest.permission.CAMERA,cameraPermCode)
 
-            val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+            val cameraProviderFuture = context?.let { ProcessCameraProvider.getInstance(it) }
 
-            cameraProviderFuture.addListener({
-                val cameraProvider = cameraProviderFuture.get()
-                val previewUseCase = Preview.Builder().build().also {
-                        it.setSurfaceProvider(binding.prvCam.surfaceProvider)
-                    }
+        cameraProviderFuture?.addListener({
+            val cameraProvider = cameraProviderFuture?.get()
+            val previewUseCase = Preview.Builder().build().also {
+                it.setSurfaceProvider(binding.prvCam.surfaceProvider)
+            }
 
             val options = BarcodeScannerOptions.Builder().setBarcodeFormats(
                 FORMAT_CODE_128,
@@ -67,7 +75,7 @@ class ScanActivity : AppCompatActivity() {
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
-                 camera =cameraProvider.bindToLifecycle(
+                camera =cameraProvider.bindToLifecycle(
                     this,
                     cameraSelector,
                     previewUseCase,
@@ -77,7 +85,7 @@ class ScanActivity : AppCompatActivity() {
             }catch (e:Exception) {
                 Log.e(TAG, e.message!!)
             }
-                // toggle flash
+            // toggle flash
             if (camera.cameraInfo.hasFlashUnit()) {
                 binding.imgFlash.visibility = View.VISIBLE
                 binding.imgFlash.setOnClickListener {
@@ -93,8 +101,8 @@ class ScanActivity : AppCompatActivity() {
                 binding.imgFlash.visibility = View.GONE
             }
 
-        }, ContextCompat.getMainExecutor(this))
-
+        }, context?.let { ContextCompat.getMainExecutor(it) })
+    return view
     }
 
 
@@ -161,7 +169,7 @@ class ScanActivity : AppCompatActivity() {
                             when {
                                 qrData.startsWith("http") -> {
                                     Toast.makeText(
-                                        this,
+                                        context,
                                         "Opening URL in browser",
                                         Toast.LENGTH_SHORT
                                     ).show()
@@ -174,7 +182,7 @@ class ScanActivity : AppCompatActivity() {
                                 }
                                 else -> {
                                     Toast.makeText(
-                                        this,
+                                        context,
                                         "No scanned data found!",
                                         Toast.LENGTH_SHORT
                                     ).show()
@@ -182,10 +190,10 @@ class ScanActivity : AppCompatActivity() {
                             }
                         }
                         binding.imgCopyText.setOnClickListener {
-                            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                            val clipboard: ClipboardManager = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                             val clip = ClipData.newPlainText("QR value",binding.txtResult.text)
                             clipboard.setPrimaryClip(clip)
-                            Toast.makeText(this,"Barcode value copied to clipboard." , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context,"Barcode value copied to clipboard." , Toast.LENGTH_SHORT).show()
 
                         }
                     }
@@ -202,15 +210,9 @@ class ScanActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onRestart() {
-        super.onRestart()
-        checkPermission(android.Manifest.permission.CAMERA,cameraPermCode)
-    }
-
     private fun checkPermission(permission:String,requestCode:Int){
-        if(ContextCompat.checkSelfPermission(this,permission)== PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(this, arrayOf(permission),requestCode)
+        if(context?.let { ContextCompat.checkSelfPermission(it,permission) } == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(context as Activity, arrayOf(permission),requestCode)
         }
     }
 
@@ -224,7 +226,7 @@ class ScanActivity : AppCompatActivity() {
         if(requestCode==cameraPermCode) {
 
             if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Toast.makeText(this, "Camera permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Camera permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
 

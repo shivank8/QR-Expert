@@ -8,4 +8,6 @@
     <string name="qr_saved">QR Code saved to storage/Saved QR Code/</string>
     <string name="qr_save_error">Unable to save QR code!</string>
     <string name="barcode_value">BarCode Value:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

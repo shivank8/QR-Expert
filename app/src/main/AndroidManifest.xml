@@ -20,12 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QRCode">
         <activity
-            android:name=".GenerateActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ScanActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

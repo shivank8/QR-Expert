@@ -9,15 +9,17 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -27,29 +29,32 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class GenerateActivity : AppCompatActivity() {
+class GenerateFragment : Fragment() {
     private lateinit var txtCodeData:TextView
     private lateinit var btnGenerate:Button
     private lateinit var btnSave:Button
     private var bitmap: Bitmap? = null
     private val storagePermCode=15
     private lateinit var imgQRCode:ImageView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_generate)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view= inflater.inflate(R.layout.fragment_generate, container, false)
+
         checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,storagePermCode)
-        txtCodeData=findViewById(R.id.txtCodeData)
-        btnGenerate=findViewById(R.id.btnGenerate)
-        btnSave=findViewById(R.id.btnSave)
-        imgQRCode=findViewById(R.id.imgQRCode)
+        txtCodeData=view.findViewById(R.id.txtCodeData)
+        btnGenerate=view.findViewById(R.id.btnGenerate)
+        btnSave=view.findViewById(R.id.btnSave)
+        imgQRCode=view.findViewById(R.id.imgQRCode)
         btnGenerate.setOnClickListener{
             val qrData= txtCodeData.text.toString()
             if(qrData.isNotEmpty()) {
-                closeSoftKeyboard(this,txtCodeData)
+                context?.let { it1 -> closeSoftKeyboard(it1,txtCodeData) }
                 bitmap= generateQRCode(qrData)
 
             }else{
-                Toast.makeText(this,getString(R.string.enter_qr_data),Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,getString(R.string.enter_qr_data),Toast.LENGTH_SHORT).show()
             }
         }
         btnSave.setOnClickListener{
@@ -64,13 +69,13 @@ class GenerateActivity : AppCompatActivity() {
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, out)
                 out.flush()
                 out.close()
-                Toast.makeText(this,R.string.qr_saved,Toast.LENGTH_LONG).show()
+                Toast.makeText(context,R.string.qr_saved,Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(this,"error ${e.message}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"error ${e.message}",Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
         }
-
+        return view
     }
 
     private fun generateQRCode(text: String): Bitmap {
@@ -92,8 +97,8 @@ class GenerateActivity : AppCompatActivity() {
     }
 
     private fun checkPermission(permission:String,requestCode:Int){
-        if(ContextCompat.checkSelfPermission(this,permission)== PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(this, arrayOf(permission),requestCode)
+        if(ContextCompat.checkSelfPermission(requireContext(),permission)== PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission),requestCode)
         }
     }
     override fun onRequestPermissionsResult(
@@ -106,7 +111,7 @@ class GenerateActivity : AppCompatActivity() {
         if (requestCode == storagePermCode) {
 
             if (!(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Toast.makeText(this, "Storage permission denied!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Storage permission denied!", Toast.LENGTH_SHORT).show()
             }
         }
     }
