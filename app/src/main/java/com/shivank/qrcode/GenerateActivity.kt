@@ -37,7 +37,7 @@ class GenerateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_generate)
-        checkPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE,storagePermCode)
+        checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,storagePermCode)
         txtCodeData=findViewById(R.id.txtCodeData)
         btnGenerate=findViewById(R.id.btnGenerate)
         btnSave=findViewById(R.id.btnSave)
@@ -86,9 +86,7 @@ class GenerateActivity : AppCompatActivity() {
                 }
             }
             imgQRCode.setImageBitmap(bitmap)
-            Toast.makeText(this,getString(R.string.qr_generated),Toast.LENGTH_SHORT).show()
-            // save photo
-            //val savedUri = Uri.fromFile(bitmap )
+            //Toast.makeText(this,getString(R.string.qr_generated),Toast.LENGTH_SHORT).show()
         } catch (e: WriterException) { Log.d(TAG, e.message.toString()) }
         return bitmap
     }

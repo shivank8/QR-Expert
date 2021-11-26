@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/white"
     tools:context=".GenerateActivity">
 
     <EditText
@@ -14,7 +14,7 @@
         android:layout_margin="20dp"
         android:hint="@string/enter_qr_code_value"
         android:padding="12sp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textColorHint="#DFDBDB"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnGenerate"
