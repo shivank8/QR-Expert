@@ -1,4 +1,4 @@
-package com.shivank.qrcode
+package com.shivank.qrcode.fragments
 
 import android.app.Activity
 import android.content.ContentValues.TAG
@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
+import com.shivank.qrcode.R
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -69,7 +70,7 @@ class GenerateFragment : Fragment() {
                 bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, out)
                 out.flush()
                 out.close()
-                Toast.makeText(context,R.string.qr_saved,Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.qr_saved,Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
                 Toast.makeText(context,"error ${e.message}",Toast.LENGTH_SHORT).show()
                 e.printStackTrace()

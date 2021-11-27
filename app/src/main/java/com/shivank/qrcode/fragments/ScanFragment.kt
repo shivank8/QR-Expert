@@ -1,10 +1,9 @@
-package com.shivank.qrcode
+package com.shivank.qrcode.fragments
 
 import android.app.Activity
 import android.app.SearchManager
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,20 +13,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.google.mlkit.vision.barcode.Barcode.*
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
+import com.shivank.qrcode.R
 import com.shivank.qrcode.databinding.ActivityMainBinding
 import java.util.concurrent.Executors
 
@@ -193,7 +190,7 @@ class ScanFragment : Fragment() {
                             val clipboard: ClipboardManager = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                             val clip = ClipData.newPlainText("QR value",binding.txtResult.text)
                             clipboard.setPrimaryClip(clip)
-                            Toast.makeText(context,"Barcode value copied to clipboard." , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context,"QR code value copied to clipboard." , Toast.LENGTH_SHORT).show()
 
                         }
                     }

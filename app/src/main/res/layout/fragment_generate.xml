@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".GenerateFragment">
+    tools:context=".fragments.GenerateFragment">
 
     <EditText
         android:id="@+id/txtCodeData"
@@ -15,7 +15,7 @@
         android:hint="@string/enter_qr_code_value"
         android:padding="12sp"
         android:textColor="@color/black"
-        android:textColorHint="#DFDBDB"
+        android:textColorHint="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnGenerate"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:text="@string/generate"
         android:textSize="16sp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/imgQRCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -53,8 +54,9 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save to Galley"
+        android:text="@string/save_to_galley"
         android:textSize="16sp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -7,7 +7,10 @@
     <string name="qr_generated">QR Code generated!</string>
     <string name="qr_saved">QR Code saved to storage/Saved QR Code/</string>
     <string name="qr_save_error">Unable to save QR code!</string>
-    <string name="barcode_value">BarCode Value:</string>
+    <string name="barcode_value">QR Code Value:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save_to_galley">Save to Galley</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="generate_qr_code">Generate Qr Code</string>
 </resources>

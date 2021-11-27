@@ -6,10 +6,12 @@
         <entry key="..\:/Users/ASUS/.gradle/caches/transforms-3/37fb01abb233ab64f0c0056c608d69a7/transformed/jetified-play-services-base-17.6.0/res/drawable/common_google_signin_btn_text_dark.xml" value="0.2703125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_app_icon.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_copy.xml" value="0.2703125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_flash_off.xml" value="0.2703125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_flash_on.xml" value="0.2703125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_flip_camera.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/ic_search.xml" value="0.2703125" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/drawable/qr_code_here.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_generate.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_intro.xml" value="0.176" />
@@ -17,6 +19,9 @@
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_scan.xml" value="0.152" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_scan_result.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/fragment_generate.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/fragment_scan.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/layout/fragment_splash_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ASUS/AndroidStudioProjects/QRCode/app/src/main/res/menu/setting_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
