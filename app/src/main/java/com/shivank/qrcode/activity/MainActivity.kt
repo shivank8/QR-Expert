@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             changeFragment(DashboardFragment())
-        }, 1500)
+        }, 2000)
     }
     private fun changeFragment(fragment : Fragment) {
         val fragmentManager = supportFragmentManager

@@ -162,7 +162,7 @@ class ScanFragment : Fragment() {
                         }
 
                         binding.imgSearch.setOnClickListener {
-                            val browserIntent = Intent(Intent.ACTION_WEB_SEARCH)
+
                             when {
                                 qrData.startsWith("http") -> {
                                     Toast.makeText(
@@ -170,10 +170,12 @@ class ScanFragment : Fragment() {
                                         "Opening URL in browser",
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                    browserIntent.data = Uri.parse(qrData);
-                                    startActivity(browserIntent);
+                                    val  intent =  Intent(Intent.ACTION_VIEW)
+                                    intent.data = Uri.parse(qrData);
+                                    startActivity(intent);
                                 }
                                 qrData.isNotEmpty() -> {
+                                    val browserIntent = Intent(Intent.ACTION_WEB_SEARCH)
                                     browserIntent.putExtra(SearchManager.QUERY, qrData)
                                     startActivity(browserIntent);
                                 }
