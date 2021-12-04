@@ -72,7 +72,7 @@ class GenerateFragment : Fragment() {
                 out.close()
                 Toast.makeText(context, R.string.qr_saved,Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(context,"error ${e.message}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Unable to save QR Code!",Toast.LENGTH_SHORT).show()
                 e.printStackTrace()
             }
         }
