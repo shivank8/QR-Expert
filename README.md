@@ -1,7 +1,7 @@
 # QR Expert: QR/Barcode Scanner & Generator | Android, Kotlin, CameraX, Machine Learning Kit 
 
-• Developed a QR scanner and generator app in Kotlin, where a user can scan any QR code to decode its data. It   can be used for generating a QR code for any use.<br />
-• It uses Firebase ML Kit to decode QR data fetched from the camera.
+• Developed a QR scanner and generator app in Kotlin, where a user can scan any QR code to decode its data. It can be used for generating a QR code for any use.<br />
+• It uses Firebase ML Kit to decode QR data fetched from the camera.<br />
 • It uses zxing API to generate a QR code that can be easily saved to internal storage for further use.
 
 
