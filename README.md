@@ -29,7 +29,7 @@ Developed a QR scanner and generator app in Kotlin, where a user can scan any QR
 ```license
 MIT License
 
-Copyright (c) 2017 Shivank Verma
+Copyright (c) 2021 Shivank Verma
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
