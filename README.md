@@ -6,7 +6,8 @@ Developed a QR scanner and generator app in Kotlin, where a user can scan any QR
         height="80"
         src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" />
 </a>
-[Application Landing Website](https://shivankvermaplayst.wixsite.com/qr-expert)
+
+   [     Application Landing Website](https://shivankvermaplayst.wixsite.com/qr-expert)
 
 
 ### Application developed by : [@shivank verma](https://github.com/shivank8)
